@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:18:39 by jvictor-          #+#    #+#             */
-/*   Updated: 2021/07/10 01:31:47 by jvictor-         ###   ########.fr       */
+/*   Updated: 2021/07/13 22:08:11 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	read_and_join(int fd, char **buf_of_read,
 		if (*bytes < 0 || *bytes > BUFFER_SIZE)
 		{
 			free(*buf_of_line);
-			return (GNL_ERROR);
+			return (-1);
 		}
 		temporary_of_read = *buf_of_read;
 		*buf_of_read = ft_strjoin(temporary_of_read, *buf_of_line);
@@ -80,15 +80,16 @@ char	*make_line_and_buf_of_read(char **line, char *buf_of_read, int bytes)
 	return (new_buf_of_read);
 }
 
-int	get_next_line(int fd, char **line)
+char	*get_next_line(int fd)
 {
 	static char		*buf_of_read;
+	char			*line;
 	char			*buf_of_line;
 	int				bytes;
 	int				verification;
 
 	bytes = 1;
-	if (fd < 0 || !line || BUFFER_SIZE <= 0 || fd > MAX_FILE_DESCRIPTOR)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > MAX_FILE_DESCRIPTOR)
 		return (GNL_ERROR);
 	if (!buf_of_read)
 	{
@@ -100,9 +101,9 @@ int	get_next_line(int fd, char **line)
 	if (!buf_of_line)
 		return (GNL_ERROR);
 	verification = read_and_join(fd, &buf_of_read, &buf_of_line, &bytes);
-	if (verification == GNL_ERROR)
+	if (verification == -1)
 		return (GNL_ERROR);
-	buf_of_read = make_line_and_buf_of_read(line, buf_of_read, bytes);
+	buf_of_read = make_line_and_buf_of_read(&line, buf_of_read, bytes);
 	if (!bytes)
 		return (GNL_FOUND_EOF);
 	return (GNL_SUCCESSFULL);

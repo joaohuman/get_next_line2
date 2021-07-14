@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:32:21 by jvictor-          #+#    #+#             */
-/*   Updated: 2021/07/12 20:24:02 by jvictor-         ###   ########.fr       */
+/*   Updated: 2021/07/13 22:06:47 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@
 # include <fcntl.h>
 # include <sys/stat.h>
 
-# define GNL_ERROR -1
+# define GNL_ERROR NULL
 # define GNL_FOUND_LINEBREAK 1
-# define GNL_FOUND_EOF 0
+# define GNL_FOUND_EOF NULL
 # define MAX_FILE_DESCRIPTOR RLIMIT_NOFILE
 # define HAV_BRK_LINE 1
 # define HAVNT_BRK_LINE 0
 # define READ_AND_JOINED_OR_EOF 1
-# define GNL_SUCCESSFULL 1
+# define GNL_SUCCESSFULL line
 
 /**
  * @brief Allocates memory space by the number of elements (nmemb)
@@ -82,7 +82,7 @@ int		ft_strlen(char *str);
  */
 char	*ft_substr(char *s, unsigned int start, size_t len);
 
-int		get_next_line(int fd, char **line);
+char	*get_next_line(int fd);
 
 size_t	ft_strlcpy(char *dst, char *src, size_t size);
 
