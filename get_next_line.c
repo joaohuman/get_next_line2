@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:18:39 by jvictor-          #+#    #+#             */
-/*   Updated: 2021/07/13 22:08:11 by jvictor-         ###   ########.fr       */
+/*   Updated: 2021/07/14 18:56:33 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ char	*get_next_line(int fd)
 	int				verification;
 
 	bytes = 1;
+	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > MAX_FILE_DESCRIPTOR)
 		return (GNL_ERROR);
 	if (!buf_of_read)
