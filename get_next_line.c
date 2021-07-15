@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:18:39 by jvictor-          #+#    #+#             */
-/*   Updated: 2021/07/14 19:31:13 by jvictor-         ###   ########.fr       */
+/*   Updated: 2021/07/14 21:13:44 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,16 @@ char	*make_line_and_buf_of_read(char **line, char *buf_of_read, int bytes)
 	return (new_buf_of_read);
 }
 
+int	lastline(char **line, int bytes)
+{
+	if (!bytes && *line[0] == '\0')
+	{
+		free(*line);
+		return (1);
+	}
+	return (0);
+}
+
 char	*get_next_line(int fd)
 {
 	static char		*buf_of_read;
@@ -105,7 +115,7 @@ char	*get_next_line(int fd)
 	if (verification == -1)
 		return (GNL_ERROR);
 	buf_of_read = make_line_and_buf_of_read(&line, buf_of_read, bytes);
-	if (!bytes)
+	if (lastline(&line, bytes))
 		return (GNL_FOUND_EOF);
 	return (GNL_SUCCESSFULL);
 }
