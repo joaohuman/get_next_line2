@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:18:39 by jvictor-          #+#    #+#             */
-/*   Updated: 2021/07/15 21:41:10 by jvictor-         ###   ########.fr       */
+/*   Updated: 2021/07/15 22:04:43 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,12 @@ char	*get_next_line(int fd)
 	int				bytes;
 	int				verification;
 
-	bytes = 1;
 	line = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > MAX_FILE_DESCRIPTOR)
+	buf_of_line = (char *)ft_calloc(sizeof(char), BUFFER_SIZE + 1);
+	if (!buf_of_line)
+		return (GNL_ERROR);
+	bytes = 1;
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > MAX_FILE_DESCRIPTOR || read(fd, buf_of_line, 0) == -1)
 		return (GNL_ERROR);
 	if (!buf_of_read)
 	{
@@ -108,9 +111,6 @@ char	*get_next_line(int fd)
 		if (!buf_of_read)
 			return (GNL_ERROR);
 	}
-	buf_of_line = (char *)ft_calloc(sizeof(char), BUFFER_SIZE + 1);
-	if (!buf_of_line)
-		return (GNL_ERROR);
 	verification = read_and_join(fd, &buf_of_read, &buf_of_line, &bytes);
 	if (verification == -1)
 		return (GNL_ERROR);
