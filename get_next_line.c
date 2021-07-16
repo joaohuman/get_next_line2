@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:18:39 by jvictor-          #+#    #+#             */
-/*   Updated: 2021/07/14 21:13:44 by jvictor-         ###   ########.fr       */
+/*   Updated: 2021/07/15 21:41:10 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*make_line_and_buf_of_read(char **line, char *buf_of_read, int bytes)
 	while (buf_of_read[position_of_brkline] != '\n'
 		&& buf_of_read[position_of_brkline] != '\0')
 		position_of_brkline++;
-	*line = ft_substr(buf_of_read, 0, position_of_brkline);
+	*line = ft_substr(buf_of_read, 0, position_of_brkline + 1);
 	if (bytes)
 	{
 		if (buf_of_read[position_of_brkline] == '\n')
@@ -117,5 +117,5 @@ char	*get_next_line(int fd)
 	buf_of_read = make_line_and_buf_of_read(&line, buf_of_read, bytes);
 	if (lastline(&line, bytes))
 		return (GNL_FOUND_EOF);
-	return (GNL_SUCCESSFULL);
+	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:32:21 by jvictor-          #+#    #+#             */
-/*   Updated: 2021/07/14 19:49:16 by jvictor-         ###   ########.fr       */
+/*   Updated: 2021/07/15 21:40:45 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@
 # define HAV_BRK_LINE 1
 # define HAVNT_BRK_LINE 0
 # define READ_AND_JOINED_OR_EOF 1
-# define GNL_SUCCESSFULL line
-
-# define BUFFER_SIZE 32
 
 /**
  * @brief Allocates memory space by the number of elements (nmemb)
