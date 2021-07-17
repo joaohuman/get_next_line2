@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:18:39 by jvictor-          #+#    #+#             */
-/*   Updated: 2021/07/17 16:39:51 by jvictor-         ###   ########.fr       */
+/*   Updated: 2021/07/17 17:27:35 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlcpy(char *dst, char *src, size_t size)
 {
@@ -104,7 +104,7 @@ int	solver(int fd, char **buf_of_read, char **line,
 
 char	*get_next_line(int fd)
 {
-	static char		*buf_of_read;
+	static char		*buf_of_read[MAX_FILE_DESCRIPTOR];
 	char			*line;
 	char			*buf_of_line;
 	int				verification;
@@ -114,13 +114,13 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > MAX_FILE_DESCRIPTOR
 		|| read(fd, buf_of_line, 0) == -1)
 		return (GNL_ERROR);
-	if (!buf_of_read)
+	if (!buf_of_read[fd])
 	{
-		buf_of_read = (char *)ft_calloc(1, 1);
-		if (!buf_of_read)
+		buf_of_read[fd] = (char *)ft_calloc(1, 1);
+		if (!buf_of_read[fd])
 			return (GNL_ERROR);
 	}
-	verification = solver(fd, &buf_of_read, &line, &buf_of_line);
+	verification = solver(fd, &buf_of_read[fd], &line, &buf_of_line);
 	if (verification == -1)
 		return (GNL_ERROR);
 	if (verification == GNL_FOUND_EOF)
